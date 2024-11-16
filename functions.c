@@ -1,11 +1,16 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+void coutString(char** string)
+{
+int i = 0;
+while((*string)[i] != '\0'){printf("%c", (*string)[i++]);}
+}
 void swap(int *firstNumber, int *secondNumber)
 {
     *firstNumber ^= *secondNumber ^= *firstNumber ^= *secondNumber;
 }
-void erase(int *size, char* array, int i, int length)
+void erase(int *size, char** array, int i, int length)
 {
     if(i < 0 || length < 0) {
         printf("Wrong enters\n");
@@ -13,10 +18,12 @@ void erase(int *size, char* array, int i, int length)
     }
     if(i + length > *size){length = *size - i;}
     for (; i + length < *size; ++i)
-        array[i] = array[i + length];
+        (*array)[i] = (*array)[i + length];
 
-    array = (char*)realloc(array, sizeof(char) * (*size - length));
     *size -= length;
+    (*array) = (char*)realloc(*array, sizeof(char) * (*size));
+    if(*array == NULL){printf("safasf");return;}
+    (*array)[*size] = '\0';
 }
 void setNumber(int* number)
 {
@@ -78,11 +85,7 @@ void insertionSort(struct pair *array, int size)
     }
 free(newIndex);
 }
-void coutString(char* string)
-{
-    int i = 0;
-    while(string[i] != '\0'){printf("%c", string[i++]);}
-}
+
 void swapString(char* first,int sizeFirst, char* second, int sizeSecond)
 {
     char* helpStr = (char*)malloc(sizeof(char) * sizeFirst);

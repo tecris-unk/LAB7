@@ -17,12 +17,12 @@ void task1()
         int j = i;
         while(string[j] != ' ' && ++j < size);
         if(j - i > length){
-            erase(&size, string, i, j - i + 1);
+            erase(&size, &string, i, j - i + 1);
             i--;
         }
     }
     printf("here is your new string\n");
-    coutString(string);
+    coutString(&string);
     free(string);
     printf("\n");
 }
@@ -42,11 +42,13 @@ void task2()
     int odd = 0;
     for(int i = 0;i < size;++i )
     {
-        if(string[i] == CHAR){odd++;}
-        if(odd & 1){erase(&size, string, i, 1);i--;}
+        printf("%c %s %d\n", CHAR, string, string);
+        if(string[i] == CHAR){
+            if(odd++ & 1){erase(&size, &string, i, 1); i--; odd--;}
+        }
     }
     printf("here is your new string\n");
-    coutString(string);
+    coutString(&string);
     printf("\n");
     free(string);
 }
@@ -80,7 +82,7 @@ void task3()
     for(int i = 0;i < size;++i)
     {
         int j = evenWords[i].second;
-        coutString(array[j]);
+        coutString(&array[j]);
         printf("\n");
     }
     free(evenWords);
