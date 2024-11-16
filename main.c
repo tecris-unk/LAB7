@@ -42,7 +42,6 @@ void task2()
     int odd = 0;
     for(int i = 0;i < size;++i )
     {
-        printf("%c %s %d\n", CHAR, string, string);
         if(string[i] == CHAR){
             if(odd++ & 1){erase(&size, &string, i, 1); i--; odd--;}
         }
