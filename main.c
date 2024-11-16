@@ -70,7 +70,6 @@ void task3()
         if(array[i] == NULL){printf("memory cant be allocated");return;}
         int stringSize = 0;
 
-
         scanString(array+i, &stringSize);
         for(int j = 0; j < stringSize;)
         {
