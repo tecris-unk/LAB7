@@ -7,31 +7,28 @@ void task1()
     printf("enter  length of words, that needed to be deleted\n");
     setNumber(&length);
 
-char *string = (char*)malloc(sizeof(char));
-printf("enter string\n");
+    char *string = (char*)malloc(sizeof(char));
+    printf("enter string\n");
     while(getchar()!='\n');
     scanString(&string, &size);
 
-for(int i = 0;i < size;++i )
-{
-    int j = i;
-    while(string[j] != ' ' && ++j < size);
-    if(j - i > length){
-        erase(&size, string, i, j - i + 1);
-        i--;
+    for(int i = 0;i < size; ++i)
+    {
+        int j = i;
+        while(string[j] != ' ' && ++j < size);
+        if(j - i > length){
+            erase(&size, string, i, j - i + 1);
+            i--;
+        }
     }
-}
-printf("here is your new string\n");
-for(int i = 0;i<size;++i)
-    printf("%c", string[i]);
-printf("\n");
-free(string);
-
+    printf("here is your new string\n");
+    coutString(string);
+    free(string);
+    printf("\n");
 }
 void task2()
 {
     int size;
-
     char *string = (char*)malloc(sizeof(char));
     if(string == NULL){printf("memory cant be allocated");return;}
 
@@ -46,11 +43,10 @@ void task2()
     for(int i = 0;i < size;++i )
     {
         if(string[i] == CHAR){odd++;}
-       if(odd & 1){erase(&size, string, i, 1);i--;}
+        if(odd & 1){erase(&size, string, i, 1);i--;}
     }
     printf("here is your new string\n");
-    for(int i = 0;i<size;++i)
-        printf("%c", string[i]);
+    coutString(string);
     printf("\n");
     free(string);
 }
@@ -66,20 +62,21 @@ void task3()
     for(int i = 0;i < size;++i)
     {
         evenWords[i].second = i;
+
         array[i] = (char*)malloc(sizeof(char));
         if(array[i] == NULL){printf("memory cant be allocated");return;}
-        int stringSize = 0;
 
+        int stringSize = 0;
         scanString(array+i, &stringSize);
         for(int j = 0; j < stringSize;)
         {
-             int k = j;
-             while(array[i][k] != ' ' && ++k < stringSize);
+            int k = j;
+            while(array[i][k] != ' ' && ++k < stringSize);
             evenWords[i].first += 1 - (k - j) & 1;
-            j = k+1;
+            j = k + 1;
         }
     }
-    insertionSort((struct pair *) evenWords, size);
+    insertionSort(evenWords, size);
     for(int i = 0;i < size;++i)
     {
         int j = evenWords[i].second;
